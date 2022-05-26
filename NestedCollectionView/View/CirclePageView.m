@@ -7,36 +7,52 @@
 
 #import "CirclePageView.h"
 
+@interface CirclePageView ()
+
+// 当前页数
+//@property (nonatomic, assign) NSInteger currentPage;
+
+// 圆点数组
+@property (nonatomic, strong) NSMutableArray<UIImageView *> *viewArray;
+
+// 缩放大小
+@property (nonatomic, copy) NSArray *scaleData;
+
+@end
+
 @implementation CirclePageView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.userInteractionEnabled = NO;
+        
         self.numberOfPages = 4;
-        self.currentPage = -1;
-        self.maxPage = 7;
+        self.viewArray = [NSMutableArray array];
+        
         self.itemMargin = 6;
         self.itemWidth = 6;
         self.currentItemWidth = 16;
         self.pageIndicatorTintColor = [UIColor whiteColor];
         self.currentPageIndicatorTintColor = [UIColor blackColor];
-        self.viewArray = [NSMutableArray array];
-        self.userInteractionEnabled = NO;
         
-        locationData = @[
-        @[@1],
-        @[@1, @0.7],
-        @[@0.7, @1, @0.7],
-        @[@0.7, @1, @0.7, @0.4],
-        @[@0.4, @0.7, @1, @0.7, @0.4],
-        @[@0.4, @0.7, @1, @0.9, @0.7, @0.4],
-        @[@0.4, @0.7, @0.9, @1, @0.9, @0.7, @0.4]];
+        // 最多展示7个 后期可扩展
+        self.scaleData = @[
+            @[@1],
+            @[@1, @0.7],
+            @[@0.7, @1, @0.7],
+            @[@0.7, @1, @0.7, @0.4],
+            @[@0.4, @0.7, @1, @0.7, @0.4],
+            @[@0.4, @0.7, @1, @0.9, @0.7, @0.4],
+            @[@0.4, @0.7, @0.9, @1, @0.9, @0.7, @0.4]
+        ];
     }
     return self;
 }
 
-- (void)setupView {
+// 刷新数据
+- (void)reloadData {
     
     for (UIView *view in self.viewArray) {
         [view removeFromSuperview];
@@ -49,41 +65,43 @@
     for (int i = 0; i < count; i++) {
         UIImageView *view = [[UIImageView alloc] init];
         view.layer.cornerRadius = self.itemWidth / 2;
-//        [view addShadow:Color_Shadow offset:CGSizeMake(0, 2)];
         [self addSubview:view];
         [self.viewArray addObject:view];
     }
     
-    [self scrollWithDirection:PageScrollDirectionUnknow];
+    [self initWithDirection:PageScrollDirectionNone];
+    
 }
 
-- (void)scrollWithDirection:(PageScrollDirection)direction {
-    NSInteger count = self.numberOfPages > 7 ? 7 : self.numberOfPages;
-    NSMutableArray<NSNumber *> *arr = [NSMutableArray arrayWithArray:locationData[count - 1]];
-    //初始位置
-    CGFloat x = 0;
-    for (NSNumber *num in arr) {
-        x += num.floatValue * self.itemWidth + self.itemMargin;
-    }
-    x -= self.itemMargin + self.itemWidth;
-    x += self.currentItemWidth;
-    x = (self.bounds.size.width - x) / 2;
+// 朝某个方向滚动
+- (void)initWithDirection:(PageScrollDirection)direction {
     
+    NSInteger count = self.numberOfPages > 7 ? 7 : self.numberOfPages;
+    NSMutableArray<NSNumber *> *arr = [NSMutableArray arrayWithArray:self.scaleData[count - 1]];
+    
+    CGFloat totalWidth = 0;
+    for (NSNumber *num in arr) {
+        totalWidth += num.floatValue * self.itemWidth + self.itemMargin;
+    }
+    totalWidth -= self.itemMargin + self.itemWidth;
+    totalWidth += self.currentItemWidth;
+    
+    CGFloat x = (self.bounds.size.width - totalWidth) / 2;
     CGFloat w = self.itemWidth;
     CGFloat y = (self.bounds.size.height - w) / 2;
     
-    if (direction != PageScrollDirectionUnknow) {
-        [arr insertObject:@0.1 atIndex:0];
-    }
-    //左移调整 左侧多一个
+    // 左移需要调整x 第一个左移后会移出起始位置
     if (direction == PageScrollDirectionLeft) {
-        x -= direction * (self.itemMargin + self.itemWidth * arr[0].floatValue);
+        [arr insertObject:@0.1 atIndex:0];
+        x -= self.itemMargin + self.itemWidth * arr[0].floatValue;
+    } else if (direction == PageScrollDirectionRight) {
+        [arr insertObject:@0.1 atIndex:0];
     }
     
     for (int i = 0; i < self.viewArray.count; i++) {
         //初始化的样式与左移样式相同
         NSInteger index;
-        if (direction == PageScrollDirectionUnknow) {
+        if (direction == PageScrollDirectionNone) {
             index = i;
         } else if (direction == PageScrollDirectionRight) {
             index = self.viewArray.count - 1 - i;
@@ -106,13 +124,12 @@
     
 }
 
-//1左 0右 -1初始化
-- (void)setPositionWithDirection:(PageScrollDirection)direction animated:(BOOL)animated {
+// 移动小圆点
+- (void)scrollWithDirection:(PageScrollDirection)direction animated:(BOOL)animated {
     
-    //移动小圆点 增加新的 移除旧的
+    // 增加新的
     if (direction == PageScrollDirectionLeft) {
         UIImageView *view = [[UIImageView alloc] init];
-//        [view addShadow:Color_Shadow offset:CGSizeMake(0, 2)];
         [self addSubview:view];
         CGFloat w = self.itemWidth * 0.1;
         view.frame = CGRectMake(0, 0, w, w);
@@ -121,7 +138,6 @@
         [self.viewArray addObject:view];
     } else if (direction == PageScrollDirectionRight) {
         UIImageView *view = [[UIImageView alloc] init];
-//        [view addShadow:Color_Shadow offset:CGSizeMake(0, 2)];
         [self addSubview:view];
         CGFloat w = self.itemWidth * 0.1;
         view.frame = CGRectMake(0, 0, w, w);
@@ -130,9 +146,10 @@
         [self.viewArray insertObject:view atIndex:0];
     }
     
+    // 做移动动画 然后移除旧的
     [self layoutIfNeeded];
     [UIView animateWithDuration:animated ? 0.25 : 0 animations:^{
-        [self scrollWithDirection:direction];
+        [self initWithDirection:direction];
     } completion:^(BOOL finished) {
         if (self.viewArray.count == 0) {
             return;
@@ -148,14 +165,6 @@
         }
     }];
     
-}
-
-//移动
-- (void)scrollToCurrentPage:(NSInteger)currentPage direction:(PageScrollDirection)direction animated:(BOOL)animated {
-    if (currentPage >= 0 && currentPage < self.numberOfPages) {
-        _currentPage = currentPage;
-        [self setPositionWithDirection:direction animated:animated];
-    }
 }
 
 @end

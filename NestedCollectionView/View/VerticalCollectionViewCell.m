@@ -19,10 +19,6 @@
 //小圆点
 @property(nonatomic, strong) CirclePageView * pageView;
 
-
-@property (weak, nonatomic) IBOutlet UIButton *commitButton;
-@property (weak, nonatomic) IBOutlet UIButton *collectButton;
-
 @end
 
 @implementation VerticalCollectionViewCell
@@ -33,10 +29,10 @@
     self.collectionView.dataArray = dataArray;
     [self.collectionView reloadData];
     
-    NSLog(@"zzzz %d %d", self.currentPage, self.direction);
+    NSLog(@"zzzz %ld %ld", self.currentIndex, self.direction);
     self.pageView.numberOfPages = dataArray.count;
-    [self.pageView setupView];
-    [self.pageView scrollToCurrentPage:self.currentPage direction:self.direction animated:NO];
+    [self.pageView reloadData];
+    [self.pageView scrollWithDirection:self.direction animated:NO];
 }
 
 - (void)awakeFromNib {
@@ -46,31 +42,21 @@
     self.collectionView.horizontalDelegate = self;
     [self.contentView addSubview:self.collectionView];
         
-    self.pageView = [[CirclePageView alloc] initWithFrame:CGRectMake(0, 100, self.frame.size.width, 20)];
+    self.pageView = [[CirclePageView alloc] init];
     [self addSubview:self.pageView];
+    self.pageView.frame = CGRectMake(0, 100, UIScreen.mainScreen.bounds.size.width, 20);
     
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-//    self.pageView.frame = CGRectMake(0, 100, self.frame.size.width, 20);
-//    self.pageView.numberOfPages = self.dataArray.count;
-//    [self.pageView setupView];
-//    NSLog(@"zzzz %d %d", self.currentPage, self.direction);
-//    [self.pageView scrollToCurrentPage:self.currentPage direction:self.direction animated:NO];
     self.collectionView.frame = self.bounds;
 }
 
 - (void)horizontalCollectionViewDidScrollAtIndex:(NSInteger)index direction:(HorizontalScrollDirection)direction {
-    //0 1左 2右//1左 0右 -1初始化
-    if (direction == 0) {
-        direction = -1;
-    } else if (direction == 2) {
-        direction = 0;
-    }
-    NSLog(@"%d %d", index, direction);
+    NSLog(@"%ld %ld", index, direction);
     self.direction = direction;
-    [self.pageView scrollToCurrentPage:index direction:direction animated:YES];
+    [self.pageView scrollWithDirection:direction animated:YES];
 }
 
 @end

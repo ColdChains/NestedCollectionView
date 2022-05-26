@@ -11,13 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VerticalCollectionViewCell : UICollectionViewCell
 
-@property(nonatomic, assign) NSInteger currentPage;
-@property(nonatomic, copy) NSArray<UIColor *> *dataArray;
+@property(nonatomic, assign) NSInteger currentIndex;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewBottom;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commitButtonWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectButtonWidth;
+@property(nonatomic, copy) NSArray<UIColor *> *dataArray;
 
 @end
 

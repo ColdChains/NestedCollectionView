@@ -50,7 +50,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     VerticalCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([VerticalCollectionViewCell class]) forIndexPath:indexPath];
-    cell.currentPage = self.currentIndex;
+    cell.currentIndex = self.currentIndex;
     cell.dataArray = self.dataArray[indexPath.item];
     return cell;
 }

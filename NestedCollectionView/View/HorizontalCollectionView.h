@@ -19,8 +19,10 @@ typedef NS_ENUM(NSUInteger, HorizontalScrollDirection) {
 
 @optional
 
+// 点击Item
 - (void)horizontalCollectionViewDidSelectItemAtIndex:(NSInteger)index;
 
+// 滚到到某个Item
 - (void)horizontalCollectionViewDidScrollAtIndex:(NSInteger)index direction:(HorizontalScrollDirection)direction;
 
 @end

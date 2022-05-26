@@ -30,21 +30,11 @@
                                     <constraint firstAttribute="height" constant="333" id="g4e-ET-AAM"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-07-39U">
-                                <rect key="frame" x="0.0" y="340" width="309" height="102"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="102" id="NCk-0C-sI9"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Scw-6d-lKG" firstAttribute="centerY" secondItem="6Aj-SP-7Hs" secondAttribute="centerY" id="25p-dh-EPr"/>
                             <constraint firstItem="Scw-6d-lKG" firstAttribute="centerX" secondItem="6Aj-SP-7Hs" secondAttribute="centerX" id="AZT-5T-NES"/>
-                            <constraint firstAttribute="trailing" secondItem="a4l-07-39U" secondAttribute="trailing" id="CAq-i1-gxX"/>
-                            <constraint firstAttribute="bottom" secondItem="a4l-07-39U" secondAttribute="bottom" id="ML7-96-4Ea"/>
-                            <constraint firstItem="a4l-07-39U" firstAttribute="leading" secondItem="6Aj-SP-7Hs" secondAttribute="leading" id="U4c-Hj-zWa"/>
                         </constraints>
                     </view>
                 </subviews>

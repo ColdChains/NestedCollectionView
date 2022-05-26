@@ -10,35 +10,42 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, PageScrollDirection) {
-    PageScrollDirectionUnknow = -1,
-    PageScrollDirectionLeft = 1,
-    PageScrollDirectionRight = 0,
-};//1左 0右 -1初始化
+    PageScrollDirectionNone,
+    PageScrollDirectionLeft,
+    PageScrollDirectionRight,
+};
 
 @interface CirclePageView : UIView
-{
-    NSArray *locationData;
-}
-//总数量
+
+// 当前页数
+//@property (nonatomic, assign, readonly) NSInteger currentPage;
+
+// 圆点数组
+@property (nonatomic, strong, readonly) NSMutableArray<UIImageView *> *viewArray;
+
+// 总页数
 @property (nonatomic, assign) NSInteger numberOfPages;
-@property (nonatomic, assign) NSInteger currentPage;
-//最多显示数量
-@property (nonatomic, assign) NSInteger maxPage;
-//间距
+
+// 间距
 @property (nonatomic, assign) CGFloat itemMargin;
+
+// 正常圆点宽度
 @property (nonatomic, assign) CGFloat itemWidth;
+
+// 当前圆点宽度
 @property (nonatomic, assign) CGFloat currentItemWidth;
-//颜色
+
+// 正常圆点颜色
 @property (nonatomic, strong) UIColor *pageIndicatorTintColor;
+
+// 当前圆点颜色
 @property (nonatomic, strong) UIColor *currentPageIndicatorTintColor;
 
-@property (nonatomic, strong) NSMutableArray<UIImageView *> *viewArray;
+// 刷新数据
+- (void)reloadData;
 
-// 滚动到第几页
-- (void)scrollToCurrentPage:(NSInteger)currentPage direction:(PageScrollDirection)direction animated:(BOOL)animated;
-
-// 恢复状态
-- (void)setupView;
+// 移动小圆点
+- (void)scrollWithDirection:(PageScrollDirection)direction animated:(BOOL)animated;
 
 @end
 
