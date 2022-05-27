@@ -21,7 +21,7 @@
     effectView.tag = 100;
     [self.bgImageView addSubview:effectView];
     
-//    self.bgImageView.hidden = YES;
+    self.bgImageView.hidden = YES;
 }
 
 - (void)layoutSubviews {

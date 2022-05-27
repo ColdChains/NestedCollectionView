@@ -1,16 +1,13 @@
 //
-//  CirclePageView.m
+//  ScalePageView.m
 //  QL
 //
 //  Created by lax on 2021/6/16.
 //
 
-#import "CirclePageView.h"
+#import "ScalePageView.h"
 
-@interface CirclePageView ()
-
-// 当前页数
-//@property (nonatomic, assign) NSInteger currentPage;
+@interface ScalePageView ()
 
 // 圆点数组
 @property (nonatomic, strong) NSMutableArray<UIImageView *> *viewArray;
@@ -20,7 +17,7 @@
 
 @end
 
-@implementation CirclePageView
+@implementation ScalePageView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

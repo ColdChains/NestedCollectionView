@@ -7,7 +7,8 @@
 
 #import "VerticalCollectionViewCell.h"
 #import "HorizontalCollectionView.h"
-#import "CirclePageView.h"
+#import "ScalePageView.h"
+#import "AnimatedPageView.h"
 
 @interface VerticalCollectionViewCell() <HorizontalCollectionViewDelegate>
 
@@ -17,7 +18,8 @@
 @property(nonatomic, strong) HorizontalCollectionView * collectionView;
 
 //小圆点
-@property(nonatomic, strong) CirclePageView * pageView;
+@property(nonatomic, strong) ScalePageView * scalePageView;
+@property(nonatomic, strong) AnimatedPageView * animatedPageView;
 
 @end
 
@@ -29,10 +31,13 @@
     self.collectionView.dataArray = dataArray;
     [self.collectionView reloadData];
     
-    NSLog(@"zzzz %ld %ld", self.currentIndex, self.direction);
-    self.pageView.numberOfPages = dataArray.count;
-    [self.pageView reloadData];
-    [self.pageView scrollWithDirection:self.direction animated:NO];
+    self.scalePageView.numberOfPages = dataArray.count;
+    [self.scalePageView reloadData];
+    [self.scalePageView scrollWithDirection:self.direction animated:NO];
+    
+    self.animatedPageView.numberOfPages = dataArray.count;
+    [self.animatedPageView reloadData];
+    [self.animatedPageView scrollToIndex:self.currentIndex animated:NO];
 }
 
 - (void)awakeFromNib {
@@ -41,11 +46,16 @@
     self.collectionView = [[HorizontalCollectionView alloc] init];
     self.collectionView.horizontalDelegate = self;
     [self.contentView addSubview:self.collectionView];
-        
-    self.pageView = [[CirclePageView alloc] init];
-    [self addSubview:self.pageView];
-    self.pageView.frame = CGRectMake(0, 100, UIScreen.mainScreen.bounds.size.width, 20);
     
+    // 样式一
+    self.scalePageView = [[ScalePageView alloc] init];
+    [self addSubview:self.scalePageView];
+    self.scalePageView.frame = CGRectMake(0, 100, UIScreen.mainScreen.bounds.size.width, 20);
+    
+    // 样式二
+//    self.animatedPageView = [[AnimatedPageView alloc] init];
+//    [self addSubview:self.animatedPageView];
+//    self.animatedPageView.frame = CGRectMake(0, 100, UIScreen.mainScreen.bounds.size.width, 20);
 }
 
 - (void)layoutSubviews {
@@ -54,9 +64,11 @@
 }
 
 - (void)horizontalCollectionViewDidScrollAtIndex:(NSInteger)index direction:(HorizontalScrollDirection)direction {
-    NSLog(@"%ld %ld", index, direction);
     self.direction = direction;
-    [self.pageView scrollWithDirection:direction animated:YES];
+    [self.scalePageView scrollWithDirection:direction animated:YES];
+    
+    self.currentIndex = index;
+    [self.animatedPageView scrollToIndex:index animated:YES];
 }
 
 @end

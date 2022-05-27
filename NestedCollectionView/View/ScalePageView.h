@@ -1,5 +1,5 @@
 //
-//  CirclePageView.h
+//  ScalePageView.h
 //  QL
 //
 //  Created by lax on 2021/6/16.
@@ -15,10 +15,7 @@ typedef NS_ENUM(NSInteger, PageScrollDirection) {
     PageScrollDirectionRight,
 };
 
-@interface CirclePageView : UIView
-
-// 当前页数
-//@property (nonatomic, assign, readonly) NSInteger currentPage;
+@interface ScalePageView : UIView
 
 // 圆点数组
 @property (nonatomic, strong, readonly) NSMutableArray<UIImageView *> *viewArray;

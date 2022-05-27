@@ -48,7 +48,7 @@
     return self;
 }
 
-// 获取真实位置
+// 当前位置转真实位置
 - (NSInteger)realIndexWithCurrentIndex:(NSInteger)currentIndex {
     NSInteger index;
     if (currentIndex == 0) {
@@ -72,7 +72,9 @@
 
 - (void)reloadData {
     [super reloadData];
-    [self scrollToItemAtIndex:0];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{    
+        [self scrollToItemAtIndex:0];
+    });
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

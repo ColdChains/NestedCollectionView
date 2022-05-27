@@ -20,7 +20,8 @@
 		18594370283B60F300A1037E /* HorizontalCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18594369283B60F300A1037E /* HorizontalCollectionViewCell.xib */; };
 		18594371283B60F300A1037E /* VerticalCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859436A283B60F300A1037E /* VerticalCollectionView.m */; };
 		18594372283B60F300A1037E /* VerticalCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1859436C283B60F300A1037E /* VerticalCollectionViewCell.m */; };
-		18594375283B610A00A1037E /* CirclePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18594374283B610A00A1037E /* CirclePageView.m */; };
+		18594375283B610A00A1037E /* ScalePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18594374283B610A00A1037E /* ScalePageView.m */; };
+		18F4425D2840641000E63649 /* AnimatedPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F4425C2840641000E63649 /* AnimatedPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +47,10 @@
 		1859436A283B60F300A1037E /* VerticalCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalCollectionView.m; sourceTree = "<group>"; };
 		1859436B283B60F300A1037E /* VerticalCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalCollectionViewCell.h; sourceTree = "<group>"; };
 		1859436C283B60F300A1037E /* VerticalCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalCollectionViewCell.m; sourceTree = "<group>"; };
-		18594373283B610A00A1037E /* CirclePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CirclePageView.h; sourceTree = "<group>"; };
-		18594374283B610A00A1037E /* CirclePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CirclePageView.m; sourceTree = "<group>"; };
+		18594373283B610A00A1037E /* ScalePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScalePageView.h; sourceTree = "<group>"; };
+		18594374283B610A00A1037E /* ScalePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScalePageView.m; sourceTree = "<group>"; };
+		18F4425B2840641000E63649 /* AnimatedPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimatedPageView.h; sourceTree = "<group>"; };
+		18F4425C2840641000E63649 /* AnimatedPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimatedPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +112,10 @@
 				18594367283B60F300A1037E /* HorizontalCollectionViewCell.h */,
 				18594364283B60F300A1037E /* HorizontalCollectionViewCell.m */,
 				18594369283B60F300A1037E /* HorizontalCollectionViewCell.xib */,
-				18594373283B610A00A1037E /* CirclePageView.h */,
-				18594374283B610A00A1037E /* CirclePageView.m */,
+				18594373283B610A00A1037E /* ScalePageView.h */,
+				18594374283B610A00A1037E /* ScalePageView.m */,
+				18F4425B2840641000E63649 /* AnimatedPageView.h */,
+				18F4425C2840641000E63649 /* AnimatedPageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,12 +192,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18594375283B610A00A1037E /* CirclePageView.m in Sources */,
+				18594375283B610A00A1037E /* ScalePageView.m in Sources */,
 				1859436E283B60F300A1037E /* HorizontalCollectionView.m in Sources */,
 				18594351283B60C100A1037E /* ViewController.m in Sources */,
 				1859434B283B60C100A1037E /* AppDelegate.m in Sources */,
 				1859435C283B60C500A1037E /* main.m in Sources */,
 				18594372283B60F300A1037E /* VerticalCollectionViewCell.m in Sources */,
+				18F4425D2840641000E63649 /* AnimatedPageView.m in Sources */,
 				18594371283B60F300A1037E /* VerticalCollectionView.m in Sources */,
 				1859434E283B60C100A1037E /* SceneDelegate.m in Sources */,
 				1859436D283B60F300A1037E /* HorizontalCollectionViewCell.m in Sources */,
